@@ -1,6 +1,10 @@
 import PersonService from '../services/person'
 
 export const getPeople = () => {
-  const response = PersonService.getPeople()
-  return response
+  return PersonService.getPeople()
+}
+
+export const getPerson = (_, args) => {
+  const { id } = args
+  return PersonService.getPerson(id)
 }
