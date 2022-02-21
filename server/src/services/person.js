@@ -6,11 +6,22 @@ class PersonService {
   }
 
   static getPerson(personId) {
-    return people.find((person) => person.id === personId)
+    const response = people.find((person) => person.id === personId)
+
+    if (!response) {
+      throw new Error(`Person with id ${personId} not found`)
+    }
+
+    return response
   }
 
   static getPersonWithCars(personId) {
     const person = people.find((person) => person.id === personId)
+
+    if (!person) {
+      throw new Error(`Person with id ${personId} not found`)
+    }
+
     const personCars = cars.filter((car) => car.personId === personId)
     return {
       personId: person.id,
