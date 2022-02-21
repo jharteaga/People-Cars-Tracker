@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server'
 import { getPeople } from './controllers/person'
+import { getCars } from './controllers/car'
 
 const typeDefs = gql`
   type Person {
@@ -19,12 +20,14 @@ const typeDefs = gql`
 
   type Query {
     people: [Person]
+    cars: [Car]
   }
 `
 
 const resolvers = {
   Query: {
-    people: getPeople
+    people: getPeople,
+    cars: getCars
   }
 }
 
