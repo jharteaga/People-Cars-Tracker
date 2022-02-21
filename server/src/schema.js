@@ -18,7 +18,7 @@ const typeDefs = gql`
     personId: String!
   }
 
-  type PersonCars {
+  type PersonWithCars {
     personId: String!
     firstName: String!
     lastName: String!
@@ -30,7 +30,7 @@ const typeDefs = gql`
     cars: [Car]
     person(id: String!): Person
     car(id: String!): Car
-    personWithCars(personId: String!): PersonCars
+    personWithCars(personId: String!): PersonWithCars
   }
 `
 
