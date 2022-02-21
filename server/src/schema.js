@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server'
-import { getPeople, getPerson } from './controllers/person'
+import { getPeople, getPerson, getPersonWithCars } from './controllers/person'
 import { getCars, getCar } from './controllers/car'
 
 const typeDefs = gql`
@@ -18,11 +18,19 @@ const typeDefs = gql`
     personId: String!
   }
 
+  type PersonCars {
+    personId: String!
+    firstName: String!
+    lastName: String!
+    cars: [Car]
+  }
+
   type Query {
     people: [Person]
     cars: [Car]
     person(id: String!): Person
     car(id: String!): Car
+    personWithCars(personId: String!): PersonCars
   }
 `
 
@@ -31,7 +39,8 @@ const resolvers = {
     people: getPeople,
     person: getPerson,
     cars: getCars,
-    car: getCar
+    car: getCar,
+    personWithCars: getPersonWithCars
   }
 }
 
