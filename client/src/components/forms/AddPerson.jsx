@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Form, Input } from 'antd'
-import { useState } from 'react'
 
 const AddPerson = () => {
   const [form] = Form.useForm()
