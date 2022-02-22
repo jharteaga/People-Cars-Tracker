@@ -7,7 +7,7 @@ import {
   removePerson,
   updatePerson
 } from './controllers/person'
-import { getCars, getCar } from './controllers/car'
+import { addCar, getCars, getCar } from './controllers/car'
 
 const typeDefs = gql`
   type Person {
@@ -75,7 +75,8 @@ const resolvers = {
   Mutation: {
     addPerson: addPerson,
     updatePerson: updatePerson,
-    removePerson: removePerson
+    removePerson: removePerson,
+    addCar: addCar
   }
 }
 

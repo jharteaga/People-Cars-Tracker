@@ -14,6 +14,25 @@ class CarService {
 
     return response
   }
+
+  static addCar(id, year, make, model, price, personId) {
+    if (cars.find((car) => car.id === id)) {
+      throw new Error(`Car with id ${id} already exists`)
+    }
+
+    const car = {
+      id,
+      year,
+      make,
+      model,
+      price,
+      personId
+    }
+
+    cars.push(car)
+
+    return car
+  }
 }
 
 export default CarService
