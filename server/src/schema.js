@@ -7,7 +7,13 @@ import {
   removePerson,
   updatePerson
 } from './controllers/person'
-import { addCar, getCars, getCar } from './controllers/car'
+import {
+  addCar,
+  getCars,
+  getCar,
+  removeCar,
+  updateCar
+} from './controllers/car'
 
 const typeDefs = gql`
   type Person {
@@ -76,7 +82,9 @@ const resolvers = {
     addPerson: addPerson,
     updatePerson: updatePerson,
     removePerson: removePerson,
-    addCar: addCar
+    addCar: addCar,
+    updateCar: updateCar,
+    removeCar: removeCar
   }
 }
 
