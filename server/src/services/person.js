@@ -30,6 +30,18 @@ class PersonService {
       cars: personCars
     }
   }
+
+  static addPerson(id, firstName, lastName) {
+    const person = {
+      id,
+      firstName,
+      lastName
+    }
+
+    people.push(person)
+
+    return person
+  }
 }
 
 export default PersonService

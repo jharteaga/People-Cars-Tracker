@@ -13,3 +13,8 @@ export const getPersonWithCars = (_, args) => {
   const { personId } = args
   return PersonService.getPersonWithCars(personId)
 }
+
+export const addPerson = (_, args) => {
+  const { id, firstName, lastName } = args
+  return PersonService.addPerson(id, firstName, lastName)
+}
