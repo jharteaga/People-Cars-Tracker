@@ -2,6 +2,7 @@ import './App.css'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import FormsContainer from './components/layout/FormsContainer'
+import ListsContainer from './components/layout/ListsContainer'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -16,7 +17,8 @@ const styles = {
     marginTop: '1rem',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: '2rem'
   },
   title: {
     fontSize: '2rem',
@@ -30,6 +32,7 @@ const App = () => (
     <div style={styles.container}>
       <h1 style={styles.title}>People Cars Tracker</h1>
       <FormsContainer />
+      <ListsContainer />
     </div>
   </ApolloProvider>
 )

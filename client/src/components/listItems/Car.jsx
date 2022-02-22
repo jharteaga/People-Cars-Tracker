@@ -7,14 +7,14 @@ const getStyles = (props) => ({
   }
 })
 
-const Person = ({ person: { firstName, lastName } }) => {
+const Car = ({ car: { make, model, year, price } }) => {
   const styles = getStyles()
   return (
     <Card
       style={styles.card}
       actions={[<EditOutlined key="edit" />]}
-    >{`${firstName} ${lastName}`}</Card>
+    >{`${make} ${model}`}</Card>
   )
 }
 
-export default Person
+export default Car

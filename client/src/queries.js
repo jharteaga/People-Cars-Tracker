@@ -9,3 +9,15 @@ export const GET_PEOPLE = gql`
     }
   }
 `
+
+export const GET_CARS = gql`
+  {
+    cars {
+      id
+      make
+      model
+      year
+      price
+    }
+  }
+`
