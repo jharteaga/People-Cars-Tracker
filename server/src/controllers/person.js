@@ -23,3 +23,8 @@ export const updatePerson = (_, args) => {
   const { id, firstName, lastName } = args
   return PersonService.updatePerson(id, firstName, lastName)
 }
+
+export const removePerson = (_, args) => {
+  const { id } = args
+  return PersonService.removePerson(id)
+}

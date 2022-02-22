@@ -4,6 +4,7 @@ import {
   getPeople,
   getPerson,
   getPersonWithCars,
+  removePerson,
   updatePerson
 } from './controllers/person'
 import { getCars, getCar } from './controllers/car'
@@ -73,7 +74,8 @@ const resolvers = {
   },
   Mutation: {
     addPerson: addPerson,
-    updatePerson: updatePerson
+    updatePerson: updatePerson,
+    removePerson: removePerson
   }
 }
 

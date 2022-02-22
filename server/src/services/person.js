@@ -66,6 +66,18 @@ class PersonService {
 
     return person
   }
+
+  static removePerson(id) {
+    const person = people.find((person) => person.id === id)
+
+    if (!person) {
+      throw new Error(`Person with id ${id} not found`)
+    }
+
+    people.splice(people.indexOf(person), 1)
+
+    return person
+  }
 }
 
 export default PersonService
