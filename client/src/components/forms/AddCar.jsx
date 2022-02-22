@@ -3,7 +3,7 @@ import { Button, DatePicker, Form, Input, Select } from 'antd'
 
 const { Option } = Select
 
-const AddCar = () => {
+const AddCar = ({ style }) => {
   const [form] = Form.useForm()
   const [, forcedUpdate] = useState()
 
@@ -12,8 +12,8 @@ const AddCar = () => {
   }, [])
 
   return (
-    <>
-      <h2>Add a new car</h2>
+    <div style={style}>
+      <h2 style={{ fontWeight: 'bold' }}>Add a new car</h2>
       <Form form={form} name="add-car-form" size="large" layout="vertical">
         <Input.Group compact>
           <Form.Item
@@ -91,7 +91,7 @@ const AddCar = () => {
           )}
         </Form.Item>
       </Form>
-    </>
+    </div>
   )
 }
 
