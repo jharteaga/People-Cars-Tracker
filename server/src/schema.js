@@ -3,7 +3,8 @@ import {
   addPerson,
   getPeople,
   getPerson,
-  getPersonWithCars
+  getPersonWithCars,
+  updatePerson
 } from './controllers/person'
 import { getCars, getCar } from './controllers/car'
 
@@ -71,7 +72,8 @@ const resolvers = {
     personWithCars: getPersonWithCars
   },
   Mutation: {
-    addPerson: addPerson
+    addPerson: addPerson,
+    updatePerson: updatePerson
   }
 }
 

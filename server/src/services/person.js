@@ -42,6 +42,26 @@ class PersonService {
 
     return person
   }
+
+  static updatePerson(id, firstName, lastName) {
+    const person = people.find((person) => person.id === id)
+
+    if (!person) {
+      throw new Error(`Person with id ${id} not found`)
+    }
+
+    person.firstName = firstName
+    person.lastName = lastName
+
+    people.forEach((p) => {
+      if (p.id === id) {
+        p = person
+      }
+      return p
+    })
+
+    return person
+  }
 }
 
 export default PersonService

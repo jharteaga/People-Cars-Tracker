@@ -18,3 +18,8 @@ export const addPerson = (_, args) => {
   const { id, firstName, lastName } = args
   return PersonService.addPerson(id, firstName, lastName)
 }
+
+export const updatePerson = (_, args) => {
+  const { id, firstName, lastName } = args
+  return PersonService.updatePerson(id, firstName, lastName)
+}
