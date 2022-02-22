@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Input } from 'antd'
+import { v4 as uuidv4 } from 'uuid'
+import { ADD_PERSON, GET_PEOPLE } from '../../queries'
+import { useMutation } from '@apollo/client'
 
 const AddPerson = ({ style }) => {
+  const [id] = useState(uuidv4())
+  const [addPerson] = useMutation(ADD_PERSON)
   const [form] = Form.useForm()
   const [, forcedUpdate] = useState()
 
@@ -9,10 +14,48 @@ const AddPerson = ({ style }) => {
     forcedUpdate({})
   }, [])
 
+  const onFinish = (values) => {
+    const { firstName, lastName } = values
+
+    addPerson({
+      variables: {
+        id,
+        firstName,
+        lastName
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        addPerson: {
+          __type: 'Person',
+          id,
+          firstName,
+          lastName
+        }
+      },
+      update: (proxy, { data: { addPerson } }) => {
+        const data = proxy.readQuery({ query: GET_PEOPLE })
+        proxy.writeQuery({
+          query: GET_PEOPLE,
+          data: {
+            ...data,
+            people: [...data.people, addPerson]
+          }
+        })
+      }
+    })
+    form.resetFields()
+  }
+
   return (
     <div style={style}>
       <h2 style={{ fontWeight: 'bold' }}>Add a new person</h2>
-      <Form form={form} name="add-person-form" size="large" layout="vertical">
+      <Form
+        form={form}
+        name="add-person-form"
+        size="large"
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <Input.Group compact>
           <Form.Item
             label="First name:"
