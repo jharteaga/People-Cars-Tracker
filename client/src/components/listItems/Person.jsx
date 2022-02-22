@@ -1,7 +1,7 @@
 import { Card } from 'antd'
-import { EditOutlined } from '@ant-design/icons'
+import { EditButton, RemoveButton } from '../buttons'
 
-const getStyles = (props) => ({
+const getStyles = () => ({
   card: {
     width: '400px'
   }
@@ -12,7 +12,7 @@ const Person = ({ person: { firstName, lastName } }) => {
   return (
     <Card
       style={styles.card}
-      actions={[<EditOutlined key="edit" />]}
+      actions={[<EditButton />, <RemoveButton />]}
     >{`${firstName} ${lastName}`}</Card>
   )
 }
