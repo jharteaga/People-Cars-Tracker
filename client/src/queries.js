@@ -18,6 +18,7 @@ export const GET_CARS = gql`
       model
       year
       price
+      personId
     }
   }
 `
@@ -28,6 +29,29 @@ export const ADD_PERSON = gql`
       id
       firstName
       lastName
+    }
+  }
+`
+
+export const REMOVE_PERSON = gql`
+  mutation RemovePerson($id: String!) {
+    removePerson(id: $id) {
+      id
+      firstName
+      lastName
+    }
+  }
+`
+
+export const REMOVE_CAR = gql`
+  mutation RemoveCar($id: String!) {
+    removeCar(id: $id) {
+      id
+      year
+      make
+      model
+      price
+      personId
     }
   }
 `

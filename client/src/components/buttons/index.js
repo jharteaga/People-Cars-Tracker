@@ -1,4 +1,5 @@
 import EditButton from './EditButton'
-import RemoveButton from './RemoveButton'
+import RemovePerson from './RemovePerson'
+import RemoveCar from './RemoveCar'
 
-export { EditButton, RemoveButton }
+export { EditButton, RemovePerson, RemoveCar }

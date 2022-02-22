@@ -1,5 +1,5 @@
 import { Card } from 'antd'
-import { EditButton, RemoveButton } from '../buttons'
+import { EditButton, RemovePerson } from '../buttons'
 
 const getStyles = () => ({
   card: {
@@ -7,13 +7,13 @@ const getStyles = () => ({
   }
 })
 
-const Person = ({ person: { firstName, lastName } }) => {
+const Person = ({ person }) => {
   const styles = getStyles()
   return (
     <Card
       style={styles.card}
-      actions={[<EditButton />, <RemoveButton />]}
-    >{`${firstName} ${lastName}`}</Card>
+      actions={[<EditButton />, <RemovePerson data={person} />]}
+    >{`${person.firstName} ${person.lastName}`}</Card>
   )
 }
 
