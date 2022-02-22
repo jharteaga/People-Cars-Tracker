@@ -32,6 +32,10 @@ class PersonService {
   }
 
   static addPerson(id, firstName, lastName) {
+    if (people.find((person) => person.id === id)) {
+      throw new Error(`Person with id ${id} already exists`)
+    }
+
     const person = {
       id,
       firstName,
