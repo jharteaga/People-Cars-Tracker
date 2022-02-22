@@ -10,38 +10,46 @@ const AddPerson = () => {
   }, [])
 
   return (
-    <Form form={form} name="add-person-form" size="large">
-      <Form.Item
-        label="First name:"
-        name="firstName"
-        rules={[{ required: true, message: 'Please input your first name' }]}
-        style={{ marginBottom: 20 }}
-      >
-        <Input placeholder="i.e. John" />
-      </Form.Item>
-      <Form.Item
-        label="Last name:"
-        name="lastName"
-        rules={[{ required: true, message: 'Please input your last name' }]}
-        style={{ marginBottom: 20 }}
-      >
-        <Input placeholder="i.e. Smith" />
-      </Form.Item>
-      <Form.Item shouldUpdate={true}>
-        {() => (
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={
-              !form.isFieldsTouched(true) ||
-              form.getFieldError().filter(({ errors }) => errors.length).length
-            }
+    <>
+      <h2>Add a new person</h2>
+      <Form form={form} name="add-person-form" size="large" layout="vertical">
+        <Input.Group compact>
+          <Form.Item
+            label="First name:"
+            name="firstName"
+            rules={[
+              { required: true, message: 'Please input your first name' }
+            ]}
+            style={{ marginBottom: 20 }}
           >
-            Add Person
-          </Button>
-        )}
-      </Form.Item>
-    </Form>
+            <Input placeholder="i.e. John" />
+          </Form.Item>
+          <Form.Item
+            label="Last name:"
+            name="lastName"
+            rules={[{ required: true, message: 'Please input your last name' }]}
+            style={{ marginBottom: 20, marginLeft: 20 }}
+          >
+            <Input placeholder="i.e. Smith" />
+          </Form.Item>
+        </Input.Group>
+        <Form.Item shouldUpdate={true}>
+          {() => (
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={
+                !form.isFieldsTouched(true) ||
+                form.getFieldError().filter(({ errors }) => errors.length)
+                  .length
+              }
+            >
+              Add Person
+            </Button>
+          )}
+        </Form.Item>
+      </Form>
+    </>
   )
 }
 
