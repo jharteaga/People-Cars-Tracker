@@ -6,7 +6,24 @@ import ListsContainer from './components/layout/ListsContainer'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          people: {
+            merge(existing, incoming) {
+              return incoming
+            }
+          },
+          cars: {
+            merge(existing, incoming) {
+              return incoming
+            }
+          }
+        }
+      }
+    }
+  })
 })
 
 const styles = {

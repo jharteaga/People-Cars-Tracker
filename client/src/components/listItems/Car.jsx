@@ -8,7 +8,6 @@ const getStyles = () => ({
 })
 
 const Car = ({ car }) => {
-  console.log(car.personId)
   const styles = getStyles()
   return (
     <Card
