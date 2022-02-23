@@ -13,7 +13,7 @@ const Person = ({ person }) => {
   return (
     <Card
       style={styles.card}
-      actions={[<EditButton />, <RemovePerson data={person} />]}
+      actions={[<EditButton data={person} />, <RemovePerson data={person} />]}
     >{`${person.firstName} ${person.lastName}`}</Card>
   )
 }

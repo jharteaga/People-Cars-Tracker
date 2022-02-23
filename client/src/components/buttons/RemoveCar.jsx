@@ -58,6 +58,7 @@ const RemoveCar = ({ data }) => {
           <strong>
             {data.make} {data.model}
           </strong>
+          ?
         </p>
       </Modal>
     </>

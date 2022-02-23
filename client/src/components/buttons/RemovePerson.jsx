@@ -61,6 +61,7 @@ const RemovePerson = ({ data }) => {
           <strong>
             {data.firstName} {data.lastName}
           </strong>
+          ?
         </p>
       </Modal>
     </>
