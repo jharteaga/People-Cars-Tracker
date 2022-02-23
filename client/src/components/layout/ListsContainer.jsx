@@ -8,9 +8,10 @@ const getStyles = () => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gridGap: '1rem',
-    justifyItems: 'start',
+    justifyItems: 'center',
     width: '100%',
-    maxWidth: '950px'
+    maxWidth: '95%',
+    margin: '0 auto'
   }
 })
 

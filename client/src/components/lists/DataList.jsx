@@ -12,11 +12,21 @@ const DataList = ({ type, query, render }) => {
       <Divider orientation="left">
         {type.charAt(0).toUpperCase() + type.slice(1)}
       </Divider>
-      <List>
-        {data[type].map((item) => (
+      <List
+        grid={{
+          gutter: 16,
+          xs: 1,
+          sm: 1,
+          md: 2,
+          lg: 3,
+          xl: 3,
+          xxl: 3
+        }}
+        dataSource={data[type]}
+        renderItem={(item) => (
           <List.Item key={item.id}>{render(item)}</List.Item>
-        ))}
-      </List>
+        )}
+      />
     </div>
   )
 }

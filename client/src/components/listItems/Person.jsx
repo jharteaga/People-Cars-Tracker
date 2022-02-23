@@ -3,7 +3,8 @@ import { EditButton, RemovePerson } from '../buttons'
 
 const getStyles = () => ({
   card: {
-    width: '400px'
+    width: '300px',
+    maxWidth: '100%'
   }
 })
 

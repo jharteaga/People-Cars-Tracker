@@ -49,8 +49,8 @@ const App = () => (
     <div style={styles.container}>
       <h1 style={styles.title}>People Cars Tracker</h1>
       <FormsContainer />
-      <ListsContainer />
     </div>
+    <ListsContainer />
   </ApolloProvider>
 )
 
