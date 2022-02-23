@@ -13,7 +13,7 @@ const Car = ({ car }) => {
   return (
     <Card
       style={styles.card}
-      actions={[<EditButton />, <RemoveCar data={car} />]}
+      actions={[<EditButton type="Car" data={car} />, <RemoveCar data={car} />]}
     >{`${car.make} ${car.model}`}</Card>
   )
 }
