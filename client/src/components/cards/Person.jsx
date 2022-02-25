@@ -8,7 +8,8 @@ import UpdatePerson from '../forms/UpdatePerson'
 const getStyles = () => ({
   card: {
     width: '100%',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    margin: '1rem 0'
   },
   carsContainer: {
     display: 'flex',
