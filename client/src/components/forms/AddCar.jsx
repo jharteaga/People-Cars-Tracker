@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { Button, DatePicker, Form, Input, Select } from 'antd'
 import { v4 as uuidv4 } from 'uuid'
-import { ADD_CAR, GET_CARS } from '../../queries'
+import { ADD_CAR, GET_PEOPLE } from '../../queries'
 import moment from 'moment'
 
 const { Option } = Select
@@ -19,7 +19,6 @@ const AddCar = ({ style }) => {
 
   const onFinish = (values) => {
     const { year, make, model, price, personId } = values
-
     addCar({
       variables: {
         id,
@@ -42,19 +41,18 @@ const AddCar = ({ style }) => {
         }
       },
       update: (proxy, { data: { addCar } }) => {
-        const data = proxy.readQuery({ query: GET_CARS })
+        const data = proxy.readQuery({ query: GET_PEOPLE })
         proxy.writeQuery({
-          query: GET_CARS,
+          query: GET_PEOPLE,
           data: {
             ...data,
-            cars: [...data.cars, addCar]
+            people: [...data.people]
           }
         })
       }
     })
     form.resetFields()
   }
-
   return (
     <div style={style}>
       <h2 style={{ fontWeight: 'bold' }}>Add a new car</h2>

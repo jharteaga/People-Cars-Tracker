@@ -2,7 +2,7 @@ import './App.css'
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import FormsContainer from './components/layout/FormsContainer'
-import ListsContainer from './components/layout/ListsContainer'
+import ListContainer from './components/layout/ListContainer'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
@@ -50,7 +50,7 @@ const App = () => (
       <h1 style={styles.title}>People Cars Tracker</h1>
       <FormsContainer />
     </div>
-    <ListsContainer />
+    <ListContainer />
   </ApolloProvider>
 )
 

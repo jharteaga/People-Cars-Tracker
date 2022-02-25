@@ -2,24 +2,18 @@ import { gql } from 'apollo-server'
 import {
   addPerson,
   getPeople,
-  getPerson,
   getPersonWithCars,
   removePerson,
   updatePerson
 } from './controllers/person'
-import {
-  addCar,
-  getCars,
-  getCar,
-  removeCar,
-  updateCar
-} from './controllers/car'
+import { addCar, removeCar, updateCar } from './controllers/car'
 
 const typeDefs = gql`
   type Person {
     id: String!
     firstName: String!
     lastName: String!
+    cars: [Car]
   }
 
   type Car {
@@ -31,19 +25,9 @@ const typeDefs = gql`
     personId: String!
   }
 
-  type PersonWithCars {
-    personId: String!
-    firstName: String!
-    lastName: String!
-    cars: [Car]
-  }
-
   type Query {
     people: [Person]
-    cars: [Car]
-    person(id: String!): Person
-    car(id: String!): Car
-    personWithCars(personId: String!): PersonWithCars
+    personWithCars(personId: String!): Person
   }
 
   type Mutation {
@@ -73,9 +57,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     people: getPeople,
-    person: getPerson,
-    cars: getCars,
-    car: getCar,
     personWithCars: getPersonWithCars
   },
   Mutation: {

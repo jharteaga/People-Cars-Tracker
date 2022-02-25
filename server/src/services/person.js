@@ -2,17 +2,10 @@ import { people, cars } from '../data/peopleCarsScheme'
 
 class PersonService {
   static getPeople() {
-    return people
-  }
-
-  static getPerson(personId) {
-    const response = people.find((person) => person.id === personId)
-
-    if (!response) {
-      throw new Error(`Person with id ${personId} not found`)
-    }
-
-    return response
+    return people.map((person) => {
+      const carsOfPerson = cars.filter((car) => car.personId === person.id)
+      return { ...person, cars: carsOfPerson }
+    })
   }
 
   static getPersonWithCars(personId) {
@@ -24,7 +17,7 @@ class PersonService {
 
     const personCars = cars.filter((car) => car.personId === personId)
     return {
-      personId: person.id,
+      id: person.id,
       firstName: person.firstName,
       lastName: person.lastName,
       cars: personCars
