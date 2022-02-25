@@ -1,6 +1,8 @@
 import { EditTwoTone } from '@ant-design/icons'
 import { Card } from 'antd'
+import { useState } from 'react'
 import { RemoveCar } from '../buttons'
+import UpdateCar from '../forms/UpdateCar'
 
 const getStyles = () => ({
   card: {
@@ -17,21 +19,35 @@ const getStyles = () => ({
 })
 
 const Car = ({ car }) => {
+  const [isEditMode, setIsEditMode] = useState(false)
+
   const styles = getStyles()
   return (
-    <Card
-      type="inner"
-      style={styles.card}
-      actions={[<EditTwoTone key="edit" />, <RemoveCar data={car} />]}
-    >
-      <p style={styles.title}>{`${car.make} ${car.model}`}</p>
-      <p>
-        <span style={styles.label}>Year:</span> {car.year}
-      </p>
-      <p>
-        <span style={styles.label}>Price:</span> {car.price}
-      </p>
-    </Card>
+    <>
+      {isEditMode ? (
+        <UpdateCar data={car} onEditMode={setIsEditMode} />
+      ) : (
+        <Card
+          type="inner"
+          style={styles.card}
+          actions={[
+            <EditTwoTone
+              key="edit"
+              onClick={() => setIsEditMode((prev) => !prev)}
+            />,
+            <RemoveCar data={car} />
+          ]}
+        >
+          <p style={styles.title}>{`${car.make} ${car.model}`}</p>
+          <p>
+            <span style={styles.label}>Year:</span> {car.year}
+          </p>
+          <p>
+            <span style={styles.label}>Price:</span> {car.price}
+          </p>
+        </Card>
+      )}
+    </>
   )
 }
 

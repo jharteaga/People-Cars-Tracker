@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Button, DatePicker, Form, Input, Select } from 'antd'
 import moment from 'moment'
+import { useMutation } from '@apollo/client'
+import { UPDATE_CAR } from '../../queries'
 
 const { Option } = Select
 
-const UpdateCar = ({ data, handleOnFinish }) => {
+const UpdateCar = ({ data, onEditMode }) => {
   const [car, setCar] = useState({
     id: data.id,
     make: data.make,
@@ -14,6 +16,7 @@ const UpdateCar = ({ data, handleOnFinish }) => {
     personId: data.personId
   })
 
+  const [updateCar] = useMutation(UPDATE_CAR)
   const [form] = Form.useForm()
   const [, forcedUpdate] = useState()
 
@@ -22,7 +25,31 @@ const UpdateCar = ({ data, handleOnFinish }) => {
   }, [])
 
   const onFinish = (values) => {
-    handleOnFinish(values, car.id)
+    const { make, model, year, price, personId } = values
+
+    updateCar({
+      variables: {
+        id: car.id,
+        year: moment(year).format('YYYY'),
+        make,
+        model,
+        price: parseFloat(price),
+        personId
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateCar: {
+          __typename: 'Car',
+          id: car.id,
+          year: moment(year).format('YYYY'),
+          make,
+          model,
+          price: parseFloat(price),
+          personId
+        }
+      }
+    })
+    onEditMode(false)
     form.resetFields()
   }
 
@@ -113,7 +140,6 @@ const UpdateCar = ({ data, handleOnFinish }) => {
             min={0}
             value={car.price}
             onChange={(e) => handleChange(e)}
-            decimalSeparator={'.'}
           />
         </Form.Item>
       </Input.Group>
