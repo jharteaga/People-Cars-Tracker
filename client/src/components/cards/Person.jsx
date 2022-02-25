@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Card } from 'antd'
-import { EditButton, RemovePerson } from '../buttons'
+import { EditTwoTone } from '@ant-design/icons'
+import { RemovePerson } from '../buttons'
 import Car from './Car'
+import UpdatePerson from '../forms/UpdatePerson'
 
 const getStyles = () => ({
   card: {
@@ -18,23 +21,34 @@ const getStyles = () => ({
 })
 
 const Person = ({ person }) => {
+  const [isEditMode, setIsEditMode] = useState(false)
   const styles = getStyles()
+
   return (
-    <Card
-      style={styles.card}
-      actions={[
-        <small>Learn More</small>,
-        <EditButton type="Person" data={person} />,
-        <RemovePerson data={person} />
-      ]}
-    >
-      <p style={styles.name}>{`${person.firstName} ${person.lastName}`}</p>
-      <div style={styles.carsContainer}>
-        {person.cars?.map((car) => (
-          <Car car={car} key={car.id} />
-        ))}
-      </div>
-    </Card>
+    <>
+      {isEditMode ? (
+        <UpdatePerson data={person} onEditMode={setIsEditMode} />
+      ) : (
+        <Card
+          style={styles.card}
+          actions={[
+            <small>Learn More</small>,
+            <EditTwoTone
+              key="edit"
+              onClick={() => setIsEditMode((prev) => !prev)}
+            />,
+            <RemovePerson data={person} />
+          ]}
+        >
+          <p style={styles.name}>{`${person.firstName} ${person.lastName}`}</p>
+          <div style={styles.carsContainer}>
+            {person.cars?.map((car) => (
+              <Car car={car} key={car.id} />
+            ))}
+          </div>
+        </Card>
+      )}
+    </>
   )
 }
 

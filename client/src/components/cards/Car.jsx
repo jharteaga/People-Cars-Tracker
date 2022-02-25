@@ -1,5 +1,6 @@
+import { EditTwoTone } from '@ant-design/icons'
 import { Card } from 'antd'
-import { EditButton, RemoveCar } from '../buttons'
+import { RemoveCar } from '../buttons'
 
 const getStyles = () => ({
   card: {
@@ -21,7 +22,7 @@ const Car = ({ car }) => {
     <Card
       type="inner"
       style={styles.card}
-      actions={[<EditButton type="Car" data={car} />, <RemoveCar data={car} />]}
+      actions={[<EditTwoTone key="edit" />, <RemoveCar data={car} />]}
     >
       <p style={styles.title}>{`${car.make} ${car.model}`}</p>
       <p>

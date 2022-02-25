@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Button, Form, Input } from 'antd'
+import { useMutation } from '@apollo/client'
+import { UPDATE_PERSON } from '../../queries'
 
-const UpdatePerson = ({ data, handleOnFinish }) => {
+const UpdatePerson = ({ data, onEditMode }) => {
   const [person, setPerson] = useState({
     id: data.id,
     firstName: data.firstName,
     lastName: data.lastName
   })
 
+  const [updatePerson] = useMutation(UPDATE_PERSON)
   const [form] = Form.useForm()
   const [, forcedUpdate] = useState()
 
@@ -16,7 +19,26 @@ const UpdatePerson = ({ data, handleOnFinish }) => {
   }, [])
 
   const onFinish = (values) => {
-    handleOnFinish(values, person.id)
+    const { firstName, lastName, cars } = values
+
+    updatePerson({
+      variables: {
+        id: data.id,
+        firstName,
+        lastName
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updatePerson: {
+          __typename: 'Person',
+          id: data.id,
+          firstName,
+          lastName,
+          cars
+        }
+      }
+    })
+    onEditMode(false)
     form.resetFields()
   }
 
