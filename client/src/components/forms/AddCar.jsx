@@ -111,7 +111,14 @@ const AddCar = ({ style }) => {
             ]}
             style={{ marginBottom: 10, marginLeft: 20 }}
           >
-            <Input prefix="$" placeholder="5000" type={'number'} min={0} />
+            <Input
+              prefix="$"
+              style={{ color: '#bfbfbf' }}
+              placeholder="5000"
+              type={'number'}
+              min={0}
+              step={0.01}
+            />
           </Form.Item>
         </Input.Group>
         <Form.Item

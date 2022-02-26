@@ -168,6 +168,7 @@ const UpdateCar = ({ data, onEditMode }) => {
             placeholder="5000"
             type={'number'}
             min={0}
+            step={0.01}
             value={car.price}
             onChange={(e) => handleChange(e)}
           />
