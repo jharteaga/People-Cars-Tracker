@@ -10,7 +10,8 @@ const styles = {
   container: {
     width: '100%',
     maxWidth: '900px',
-    margin: '1rem auto'
+    margin: '1rem auto',
+    height: '100%'
   },
   topContainer: {
     display: 'flex',
