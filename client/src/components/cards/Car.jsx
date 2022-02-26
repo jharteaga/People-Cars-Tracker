@@ -1,5 +1,6 @@
 import { EditTwoTone } from '@ant-design/icons'
 import { Card } from 'antd'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { RemoveCar } from '../buttons'
 import UpdateCar from '../forms/UpdateCar'
@@ -20,11 +21,18 @@ const getStyles = () => ({
 
 const Car = ({ car }) => {
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+
+    return () => setIsMounted(false)
+  }, [])
 
   const styles = getStyles()
   return (
     <>
-      {isEditMode ? (
+      {isMounted && isEditMode ? (
         <UpdateCar data={car} onEditMode={setIsEditMode} />
       ) : (
         <Card

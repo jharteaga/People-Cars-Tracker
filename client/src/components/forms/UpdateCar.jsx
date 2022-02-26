@@ -55,6 +55,9 @@ const UpdateCar = ({ data, onEditMode }) => {
           data: {
             ...data,
             people: data.people.map((person) => {
+              if (updateCar.personId === lastOwner) {
+                return person
+              }
               if (person.id === updateCar.personId) {
                 return { ...person, cars: [...person.cars, updateCar] }
               }

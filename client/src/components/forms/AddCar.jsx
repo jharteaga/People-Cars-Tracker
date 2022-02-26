@@ -21,7 +21,7 @@ const AddCar = ({ style }) => {
     addCar({
       variables: {
         id,
-        year: moment(year).get('YYYY'),
+        year: moment(year).format('YYYY'),
         make,
         model,
         price: parseFloat(price),
@@ -32,7 +32,7 @@ const AddCar = ({ style }) => {
         addCar: {
           __type: 'Car',
           id,
-          year: moment(year).get('YYYY'),
+          year: moment(year).format('YYYY'),
           make,
           model,
           price: parseFloat(price),
@@ -45,7 +45,15 @@ const AddCar = ({ style }) => {
           query: GET_PEOPLE,
           data: {
             ...data,
-            people: [...data.people]
+            people: data.people.map((person) => {
+              if (person.id === addCar.personId) {
+                return {
+                  ...person,
+                  cars: [...person.cars, addCar]
+                }
+              }
+              return person
+            })
           }
         })
       }

@@ -4,7 +4,7 @@ import { GET_PEOPLE } from '../../queries'
 
 const { Option } = Select
 
-const PersonSelect = ({ value = '', onChange }) => {
+const PersonSelect = ({ value, onChange }) => {
   const { loading, error, data } = useQuery(GET_PEOPLE)
 
   if (loading) return <p>Loading...</p>
