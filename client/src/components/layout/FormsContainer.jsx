@@ -1,11 +1,12 @@
+import { useQuery } from '@apollo/client'
+import { GET_PEOPLE } from '../../queries'
 import AddCar from '../forms/AddCar'
 import AddPerson from '../forms/AddPerson'
 
 const getStyles = () => ({
   container: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridGap: '2rem'
+    display: 'flex',
+    gap: '2rem'
   },
   formContainer: {
     border: '1px solid #ccc',
@@ -18,14 +19,14 @@ const getStyles = () => ({
 })
 
 const FormsContainer = () => {
+  const { data } = useQuery(GET_PEOPLE)
   const styles = getStyles()
+
   return (
-    <>
-      <div style={styles.container}>
-        <AddPerson style={styles.formContainer} />
-        <AddCar style={styles.formContainer} />
-      </div>
-    </>
+    <div style={styles.container}>
+      <AddPerson style={styles.formContainer} />
+      {data?.people.length ? <AddCar style={styles.formContainer} /> : null}
+    </div>
   )
 }
 

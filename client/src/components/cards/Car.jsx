@@ -22,6 +22,7 @@ const getStyles = () => ({
 const Car = ({ car }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const styles = getStyles()
 
   useEffect(() => {
     setIsMounted(true)
@@ -29,7 +30,6 @@ const Car = ({ car }) => {
     return () => setIsMounted(false)
   }, [])
 
-  const styles = getStyles()
   return (
     <>
       {isMounted && isEditMode ? (

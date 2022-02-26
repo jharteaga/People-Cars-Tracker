@@ -49,7 +49,7 @@ const AddCar = ({ style }) => {
               if (person.id === addCar.personId) {
                 return {
                   ...person,
-                  cars: [...person.cars, addCar]
+                  cars: person?.cars ? [...person?.cars, addCar] : [addCar]
                 }
               }
               return person

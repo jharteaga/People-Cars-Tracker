@@ -29,16 +29,16 @@ const AddPerson = ({ style }) => {
           __type: 'Person',
           id,
           firstName,
-          lastName
+          lastName,
+          cars: []
         }
       },
       update: (proxy, { data: { addPerson } }) => {
-        const data = proxy.readQuery({ query: GET_PEOPLE })
+        const { people } = proxy.readQuery({ query: GET_PEOPLE })
         proxy.writeQuery({
           query: GET_PEOPLE,
           data: {
-            ...data,
-            people: [...data.people, addPerson]
+            people: [...people, addPerson]
           }
         })
       }

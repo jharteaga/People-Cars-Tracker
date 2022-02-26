@@ -30,7 +30,7 @@ const RemovePerson = ({ data }) => {
         },
         optimisticResponse: {
           __typename: 'Mutation',
-          removeContact: {
+          removePerson: {
             __typename: 'Person',
             id,
             firstName,

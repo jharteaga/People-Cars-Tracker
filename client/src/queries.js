@@ -42,6 +42,14 @@ export const ADD_PERSON = gql`
       id
       firstName
       lastName
+      cars {
+        id
+        year
+        make
+        model
+        price
+        personId
+      }
     }
   }
 `

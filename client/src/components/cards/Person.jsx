@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
 import { RemovePerson } from '../buttons'
@@ -23,11 +23,19 @@ const getStyles = () => ({
 
 const Person = ({ person }) => {
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
   const styles = getStyles()
+
+  useEffect(() => {
+    setIsMounted(true)
+
+    return () => setIsMounted(false)
+  }, [])
 
   return (
     <>
-      {isEditMode ? (
+      {isMounted && isEditMode ? (
         <UpdatePerson data={person} onEditMode={setIsEditMode} />
       ) : (
         <Card
