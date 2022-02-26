@@ -26,7 +26,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD'
 })
 
-const Car = ({ car, isReadable = false }) => {
+const Car = ({ car }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const styles = getStyles()
@@ -45,17 +45,13 @@ const Car = ({ car, isReadable = false }) => {
         <Card
           type="inner"
           style={styles.card}
-          actions={
-            !isReadable
-              ? [
-                  <EditTwoTone
-                    key="edit"
-                    onClick={() => setIsEditMode((prev) => !prev)}
-                  />,
-                  <RemoveCar data={car} />
-                ]
-              : []
-          }
+          actions={[
+            <EditTwoTone
+              key="edit"
+              onClick={() => setIsEditMode((prev) => !prev)}
+            />,
+            <RemoveCar data={car} />
+          ]}
         >
           <p style={styles.title}>{`${car.make} ${car.model}`}</p>
           <p>

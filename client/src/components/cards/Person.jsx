@@ -59,7 +59,7 @@ const Person = ({ person, isReadable = false }) => {
           <p style={styles.name}>{`${person.firstName} ${person.lastName}`}</p>
           <div style={styles.carsContainer}>
             {person.cars?.map((car) => (
-              <Car car={car} key={car.id} isReadable={isReadable} />
+              <Car car={car} key={car.id} />
             ))}
           </div>
         </Card>
