@@ -22,7 +22,7 @@ const getStyles = () => ({
   }
 })
 
-const Person = ({ person }) => {
+const Person = ({ person, isReadable = false }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
@@ -41,19 +41,23 @@ const Person = ({ person }) => {
       ) : (
         <Card
           style={styles.card}
-          actions={[
-            <Link to={`/people/${person.id}`}>Learn More</Link>,
-            <EditTwoTone
-              key="edit"
-              onClick={() => setIsEditMode((prev) => !prev)}
-            />,
-            <RemovePerson data={person} />
-          ]}
+          actions={
+            !isReadable
+              ? [
+                  <Link to={`/people/${person.id}`}>Learn More</Link>,
+                  <EditTwoTone
+                    key="edit"
+                    onClick={() => setIsEditMode((prev) => !prev)}
+                  />,
+                  <RemovePerson data={person} />
+                ]
+              : []
+          }
         >
           <p style={styles.name}>{`${person.firstName} ${person.lastName}`}</p>
           <div style={styles.carsContainer}>
             {person.cars?.map((car) => (
-              <Car car={car} key={car.id} />
+              <Car car={car} key={car.id} isReadable={isReadable} />
             ))}
           </div>
         </Card>

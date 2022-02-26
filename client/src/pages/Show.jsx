@@ -41,7 +41,7 @@ const Show = () => {
         </Link>
         <h2 style={styles.title}>Details Page</h2>
       </div>
-      <Person person={data.personWithCars} />
+      <Person person={data.personWithCars} isReadable={true} />
     </div>
   )
 }

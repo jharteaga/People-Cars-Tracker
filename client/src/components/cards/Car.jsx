@@ -19,7 +19,7 @@ const getStyles = () => ({
   }
 })
 
-const Car = ({ car }) => {
+const Car = ({ car, isReadable = false }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const styles = getStyles()
@@ -38,13 +38,17 @@ const Car = ({ car }) => {
         <Card
           type="inner"
           style={styles.card}
-          actions={[
-            <EditTwoTone
-              key="edit"
-              onClick={() => setIsEditMode((prev) => !prev)}
-            />,
-            <RemoveCar data={car} />
-          ]}
+          actions={
+            !isReadable
+              ? [
+                  <EditTwoTone
+                    key="edit"
+                    onClick={() => setIsEditMode((prev) => !prev)}
+                  />,
+                  <RemoveCar data={car} />
+                ]
+              : []
+          }
         >
           <p style={styles.title}>{`${car.make} ${car.model}`}</p>
           <p>
