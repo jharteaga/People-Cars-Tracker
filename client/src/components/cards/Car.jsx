@@ -9,7 +9,9 @@ const getStyles = () => ({
   card: {
     width: '100%',
     maxWidth: '350px',
-    marginBottom: '1rem'
+    marginBottom: '1rem',
+    borderRadius: '5px',
+    borderColor: '#e0e0e0c6'
   },
   label: {
     fontWeight: '500'

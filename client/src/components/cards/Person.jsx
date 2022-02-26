@@ -10,7 +10,9 @@ const getStyles = () => ({
   card: {
     width: '100%',
     maxWidth: '100%',
-    margin: '1rem 0'
+    margin: '1rem 0',
+    boxShadow: '0 0 3px 3px #f5f5f5dd',
+    borderRadius: '8px'
   },
   carsContainer: {
     display: 'flex',
