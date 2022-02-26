@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/client'
 import { Select } from 'antd'
 import { GET_PEOPLE } from '../../queries'
+import Loader from '../layout/Loader'
 
 const { Option } = Select
 
 const PersonSelect = ({ value, onChange }) => {
   const { loading, error, data } = useQuery(GET_PEOPLE)
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader size="small" />
   if (error) return <p>Error {error.message}</p>
 
   const handleChange = (value) => {

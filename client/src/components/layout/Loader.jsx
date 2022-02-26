@@ -9,10 +9,10 @@ const styles = {
   }
 }
 
-const Loader = () => {
+const Loader = ({ size = 'large' }) => {
   return (
     <div style={styles.loading}>
-      <Spin size="large" />
+      <Spin size={size} />
     </div>
   )
 }
