@@ -5,6 +5,7 @@ import { Button } from 'antd'
 import { useParams } from 'react-router-dom'
 import Person from '../components/cards/Person'
 import { GET_PERSON_WITH_CARS } from '../queries'
+import Loader from '../components/layout/Loader'
 
 const styles = {
   container: {
@@ -31,7 +32,7 @@ const Show = () => {
     variables: { id }
   })
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <Loader />
   if (error) return <p>Error {error.message}</p>
 
   return (

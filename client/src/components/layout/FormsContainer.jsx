@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { GET_PEOPLE } from '../../queries'
 import AddCar from '../forms/AddCar'
 import AddPerson from '../forms/AddPerson'
+import Loader from './Loader'
 
 const getStyles = () => ({
   container: {
@@ -19,8 +20,10 @@ const getStyles = () => ({
 })
 
 const FormsContainer = () => {
-  const { data } = useQuery(GET_PEOPLE)
+  const { loading, data } = useQuery(GET_PEOPLE)
   const styles = getStyles()
+
+  if (loading) return <Loader />
 
   return (
     <div style={styles.container}>
