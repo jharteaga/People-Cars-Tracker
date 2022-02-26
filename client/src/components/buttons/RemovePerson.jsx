@@ -1,9 +1,14 @@
-import { DeleteOutlined } from '@ant-design/icons'
-import { useMutation } from '@apollo/client'
-import { GET_PEOPLE, REMOVE_PERSON } from '../../queries'
+import { useState } from 'react'
 import { filter } from 'lodash'
+import { useMutation } from '@apollo/client'
+import { DeleteOutlined } from '@ant-design/icons'
+import ModalConfirmation from '../layout/ModalConfirmation'
+
+import { GET_PEOPLE, REMOVE_PERSON } from '../../queries'
 
 const RemovePerson = ({ data }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
   const [removePerson] = useMutation(REMOVE_PERSON, {
     update(proxy, { data: { removePerson } }) {
       const { people } = proxy.readQuery({ query: GET_PEOPLE })
@@ -20,34 +25,38 @@ const RemovePerson = ({ data }) => {
 
   const handleRemove = () => {
     const { id, firstName, lastName, cars } = data
-    let result = window.confirm(
-      `Are you sure you want to delete the person: ${data.firstName} ${data.lastName}?`
-    )
-    if (result) {
-      removePerson({
-        variables: {
-          id
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          removePerson: {
-            __typename: 'Person',
-            id,
-            firstName,
-            lastName,
-            cars
-          }
+
+    removePerson({
+      variables: {
+        id
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        removePerson: {
+          __typename: 'Person',
+          id,
+          firstName,
+          lastName,
+          cars
         }
-      })
-    }
+      }
+    })
   }
 
   return (
-    <DeleteOutlined
-      key="remove"
-      style={{ color: '#f00' }}
-      onClick={handleRemove}
-    />
+    <>
+      <DeleteOutlined
+        key="remove"
+        style={{ color: '#f00' }}
+        onClick={() => setIsModalVisible(true)}
+      />
+      <ModalConfirmation
+        isVisible={isModalVisible}
+        onChange={setIsModalVisible}
+        onConfirm={handleRemove}
+        message={`Are you sure you want to delete the person: ${data.firstName} ${data.lastName}?`}
+      />
+    </>
   )
 }
 

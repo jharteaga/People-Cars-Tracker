@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import { DeleteOutlined } from '@ant-design/icons'
 import { useMutation } from '@apollo/client'
 import { GET_PEOPLE, REMOVE_CAR } from '../../queries'
+import ModalConfirmation from '../layout/ModalConfirmation'
 
 const RemoveCar = ({ data }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
   const [removeCar] = useMutation(REMOVE_CAR, {
     update(proxy, { data: { removeCar } }) {
       const { people } = proxy.readQuery({
@@ -22,36 +26,40 @@ const RemoveCar = ({ data }) => {
 
   const handleRemove = () => {
     const { id, year, make, model, price, personId } = data
-    let result = window.confirm(
-      `Are you sure you want to delete the car: ${data.make} ${data.model}?`
-    )
-    if (result) {
-      removeCar({
-        variables: {
-          id
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          removeCar: {
-            __typename: 'Car',
-            id,
-            year,
-            make,
-            model,
-            price,
-            personId
-          }
+
+    removeCar({
+      variables: {
+        id
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        removeCar: {
+          __typename: 'Car',
+          id,
+          year,
+          make,
+          model,
+          price,
+          personId
         }
-      })
-    }
+      }
+    })
   }
 
   return (
-    <DeleteOutlined
-      key="delete"
-      style={{ color: '#f00' }}
-      onClick={handleRemove}
-    />
+    <>
+      <DeleteOutlined
+        key="delete"
+        style={{ color: '#f00' }}
+        onClick={() => setIsModalVisible(true)}
+      />
+      <ModalConfirmation
+        isVisible={isModalVisible}
+        onChange={setIsModalVisible}
+        onConfirm={handleRemove}
+        message={`Are you sure you want to delete the car: ${data.make} ${data.model}?`}
+      />
+    </>
   )
 }
 
