@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Card } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
 import { RemovePerson } from '../buttons'
@@ -41,7 +42,7 @@ const Person = ({ person }) => {
         <Card
           style={styles.card}
           actions={[
-            <small>Learn More</small>,
+            <Link to={`/people/${person.id}`}>Learn More</Link>,
             <EditTwoTone
               key="edit"
               onClick={() => setIsEditMode((prev) => !prev)}

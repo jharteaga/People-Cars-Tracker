@@ -8,14 +8,14 @@ class PersonService {
     })
   }
 
-  static getPersonWithCars(personId) {
-    const person = people.find((person) => person.id === personId)
+  static getPersonWithCars(id) {
+    const person = people.find((person) => person.id === id)
 
     if (!person) {
-      throw new Error(`Person with id ${personId} not found`)
+      throw new Error(`Person with id ${id} not found`)
     }
 
-    const personCars = cars.filter((car) => car.personId === personId)
+    const personCars = cars.filter((car) => car.personId === id)
     return {
       id: person.id,
       firstName: person.firstName,

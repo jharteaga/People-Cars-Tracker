@@ -5,8 +5,8 @@ export const getPeople = () => {
 }
 
 export const getPersonWithCars = (_, args) => {
-  const { personId } = args
-  return PersonService.getPersonWithCars(personId)
+  const { id } = args
+  return PersonService.getPersonWithCars(id)
 }
 
 export const addPerson = (_, args) => {
