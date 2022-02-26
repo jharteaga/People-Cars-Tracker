@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { Button, DatePicker, Form, Input, Select } from 'antd'
+import { Button, DatePicker, Form, Input } from 'antd'
 import { v4 as uuidv4 } from 'uuid'
 import { ADD_CAR, GET_PEOPLE } from '../../queries'
 import moment from 'moment'
-
-const { Option } = Select
+import PersonSelect from './PersonSelect'
 
 const AddCar = ({ style }) => {
   const [id] = useState(uuidv4())
@@ -115,9 +114,7 @@ const AddCar = ({ style }) => {
           ]}
           style={{ marginBottom: 30 }}
         >
-          <Select placeholder="Select a person" style={{ width: 250 }}>
-            <Option value="1">Bill Gates</Option>
-          </Select>
+          <PersonSelect />
         </Form.Item>
         <Form.Item shouldUpdate={true}>
           {() => (

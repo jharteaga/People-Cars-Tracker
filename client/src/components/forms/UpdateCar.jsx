@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Button, DatePicker, Form, Input, Select } from 'antd'
+import { Button, DatePicker, Form, Input } from 'antd'
 import moment from 'moment'
 import { useMutation } from '@apollo/client'
-import { UPDATE_CAR } from '../../queries'
-
-const { Option } = Select
+import { GET_PEOPLE, UPDATE_CAR } from '../../queries'
+import PersonSelect from './PersonSelect'
 
 const UpdateCar = ({ data, onEditMode }) => {
+  const [lastOwner] = useState(data.personId)
   const [car, setCar] = useState({
     id: data.id,
     make: data.make,
@@ -47,6 +47,27 @@ const UpdateCar = ({ data, onEditMode }) => {
           price: parseFloat(price),
           personId
         }
+      },
+      update: (proxy, { data: { updateCar } }) => {
+        const data = proxy.readQuery({ query: GET_PEOPLE })
+        proxy.writeQuery({
+          query: GET_PEOPLE,
+          data: {
+            ...data,
+            people: data.people.map((person) => {
+              if (person.id === updateCar.personId) {
+                return { ...person, cars: [...person.cars, updateCar] }
+              }
+              if (person.id === lastOwner) {
+                return {
+                  ...person,
+                  cars: person.cars.filter((c) => c.id !== car.id)
+                }
+              }
+              return person
+            })
+          }
+        })
       }
     })
     onEditMode(false)
@@ -57,6 +78,12 @@ const UpdateCar = ({ data, onEditMode }) => {
     const { name, value } = e.target
     setCar((prev) => {
       return { ...prev, [name]: value }
+    })
+  }
+
+  const handleSelectChange = (value) => {
+    setCar((prev) => {
+      return { ...prev, personId: value }
     })
   }
 
@@ -151,14 +178,7 @@ const UpdateCar = ({ data, onEditMode }) => {
         ]}
         style={{ marginBottom: 30 }}
       >
-        <Select
-          placeholder="Select a person"
-          style={{ width: 250 }}
-          value={car.personId}
-          name="personId"
-        >
-          <Option value="1">Bill Gates</Option>
-        </Select>
+        <PersonSelect value={car.personId} onChange={handleSelectChange} />
       </Form.Item>
       <Form.Item shouldUpdate={true}>
         {() => (
