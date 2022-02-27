@@ -1,4 +1,4 @@
-# People's Car Tracking
+# People's Cars Tracker (React + Express.js + GraphQL)
 
 <div style="display: flex; gap: 1rem;">
 <img src="https://user-images.githubusercontent.com/10744642/155863216-b8e8ab92-7896-40c9-8e57-7a86ad775fb5.png" width="500" alt="Web App preview"/>
