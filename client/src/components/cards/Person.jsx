@@ -53,7 +53,12 @@ const Person = ({ person, isReadable = false }) => {
                   />,
                   <RemovePerson data={person} />
                 ]
-              : []
+              : [
+                  <EditTwoTone
+                    key="edit"
+                    onClick={() => setIsEditMode((prev) => !prev)}
+                  />
+                ]
           }
         >
           <p style={styles.name}>{`${person.firstName} ${person.lastName}`}</p>
