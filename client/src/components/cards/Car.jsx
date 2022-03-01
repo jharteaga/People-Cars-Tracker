@@ -26,7 +26,7 @@ const formatter = new Intl.NumberFormat('en-US', {
   currency: 'USD'
 })
 
-const Car = ({ car }) => {
+const Car = ({ car, owner }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const styles = getStyles()
@@ -60,6 +60,10 @@ const Car = ({ car }) => {
           <p>
             <span style={styles.label}>Price:</span>{' '}
             {formatter.format(car.price)}
+          </p>
+          <p>
+            {' '}
+            <span style={styles.label}>Owner:</span> {owner}
           </p>
         </Card>
       )}
